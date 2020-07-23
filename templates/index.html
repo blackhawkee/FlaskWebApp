@@ -26,7 +26,25 @@
           $('a#test').bind('click', function() {
             $.getJSON('/onClick',
                 function(data) {
-              console.log(data);
+                //var canvas = document.getElementById('canvas');
+                //var context = canvas.getContext('2d');
+                //context.font = '15px Arial'
+                //context.fillStyle = '0,0,0';
+                //context.fillText(data.get('OutputPersonName'), 150, 50);
+                    //context.fillText('Hello There!!', 20, 50);
+                    //alert('helo');
+                    //var input = JSON.parse(data);
+                    //alert('Hello ' + data.OutputPersonName);
+                //console.log(data);
+                //console.log('from the java script function');
+                let out = document.getElementById('out');
+
+
+                let text = document.createTextNode('Hello ' + data.OutputPersonName);
+                //p.textContent = 'hello'
+                out.appendChild(text);
+
+
             });
             return false;
           });
@@ -45,6 +63,14 @@
                 </div>
             </a>
         </form>
+      <!--
+       <div style="float:right; width: 20%">
+            <canvas id="canvas" width="200" height="100"></canvas>
+           <canvas id="canvas" width="150" height="150"></canvas>
+        </div>
+        -->
+      <div id = "out" style="float:right;  width: 30%" class="container"></div>
+
   </div>
   </body>
 </html>

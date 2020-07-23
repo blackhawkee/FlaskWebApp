@@ -35,11 +35,12 @@ def onClick():
 
     testResponse = output.json()
     outputObj = {'OutputPersonName': testResponse["PersonName"]}
-    print(outputObj)
+    # print(outputObj)
     response = jsonify(outputObj)
-    response.status_code = 200  # or 400 or whatever
-    return testResponse["PersonName"]
-
+    # response.status_code = 200  # or 400 or whatever
+    # return testResponse["PersonName"]
+    print(response)
+    return response
 
     # return str(str(video_stream.get_frame_string()))
     # return ("nothing")
