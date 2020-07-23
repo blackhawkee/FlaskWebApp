@@ -40,9 +40,31 @@
                 let out = document.getElementById('out');
 
 
-                let text = document.createTextNode('Hello ' + data.OutputPersonName);
+                //let text = document.createTextNode('Hello ' + data.name);
+                    {#let text = document.createTextNode('Hello ' + data.name#}
+                    {#    + '<br>' + 'AccountId ' + data.mainBranch#}
+                    {#    + '<br>' + 'AccountType ' + data.mainBranch#}
+                    {#    + '<br>' + 'Balance ' + data.mainBranch#}
+                    {#    + '<br>' + 'Branch ' + data.mainBranch);#}
                 //p.textContent = 'hello'
-                out.appendChild(text);
+                    out.style.whiteSpace = "pre-wrap";
+                out.appendChild(document.createTextNode('Hello ' + data.name
+                    + '<br>' + 'AccountId ' + data.accountId
+                    + '<br>' + 'AccountType ' + data.accountType
+                    + '<br>' + 'Balance ' + data.accountType
+                    + '<br>' + 'Branch ' + data.mainBranch
+                ));
+                out.appendChild(document.createNode('<br\>'));
+                out.appendChild(document.createNode('<br/>'));
+                out.appendChild(document.createNode('br'));
+                out.appendChild(document.createTextNode('AccountId ' + data.accountId));
+                out.appendChild(document.createNode('<br>'));
+                out.appendChild(document.createTextNode('AccountType ' + data.accountType));
+                out.appendChild(document.createNode('br'));
+                out.appendChild(document.createTextNode('Balance ' + data.balance));
+                out.appendChild(document.createNode('br'));
+                out.appendChild(document.createTextNode('Branch ' + data.mainBranch));
+                out.appendChild(document.createNode('br'));
 
 
             });
