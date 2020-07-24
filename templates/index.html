@@ -38,6 +38,9 @@
                 //console.log(data);
                 //console.log('from the java script function');
                 let out = document.getElementById('out');
+                while (out.firstChild) {
+                    out.removeChild(out.firstChild);
+                }
 
 
                 //let text = document.createTextNode('Hello ' + data.name);
