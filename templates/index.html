@@ -48,23 +48,24 @@
                     {#    + '<br>' + 'Branch ' + data.mainBranch);#}
                 //p.textContent = 'hello'
                     out.style.whiteSpace = "pre-wrap";
-                out.appendChild(document.createTextNode('Hello ' + data.name
-                    + '<br>' + 'AccountId ' + data.accountId
-                    + '<br>' + 'AccountType ' + data.accountType
-                    + '<br>' + 'Balance ' + data.accountType
-                    + '<br>' + 'Branch ' + data.mainBranch
-                ));
-                out.appendChild(document.createNode('<br\>'));
-                out.appendChild(document.createNode('<br/>'));
-                out.appendChild(document.createNode('br'));
-                out.appendChild(document.createTextNode('AccountId ' + data.accountId));
-                out.appendChild(document.createNode('<br>'));
-                out.appendChild(document.createTextNode('AccountType ' + data.accountType));
-                out.appendChild(document.createNode('br'));
-                out.appendChild(document.createTextNode('Balance ' + data.balance));
-                out.appendChild(document.createNode('br'));
-                out.appendChild(document.createTextNode('Branch ' + data.mainBranch));
-                out.appendChild(document.createNode('br'));
+                    var testString = 'This is my statement one.&#13;&#10;This is my statement2';
+                {#out.appendChild(document.createTextNode('Hello ' + data.name#}
+                {#    + '&#13;&#10;' + 'AccountId ' + data.accountId#}
+                {#    + '&#13;&#10;' + 'AccountType ' + data.accountType#}
+                {#    + '<br>' + 'Balance ' + data.accountType#}
+                {#    + '<br>' + 'Branch ' + data.mainBranch#}
+                {#));#}
+                    var br = document.createElement("br");
+                    out.appendChild(document.createTextNode('Hello ' + data.name));
+                out.appendChild(document.createElement("br"));
+                out.appendChild(document.createTextNode('AccountId : ' + data.accountId));
+                out.appendChild(document.createElement("br"));
+                out.appendChild(document.createTextNode('AccountType : ' + data.accountType));
+                out.appendChild(document.createElement("br"));
+                out.appendChild(document.createTextNode('Balance : ' + data.balance));
+                out.appendChild(document.createElement("br"));
+                out.appendChild(document.createTextNode('Branch : ' + data.mainBranch));
+                out.appendChild(document.createElement("br"));
 
 
             });
