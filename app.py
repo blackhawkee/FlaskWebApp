@@ -1,3 +1,6 @@
+import os
+from http.server import HTTPServer, CGIHTTPRequestHandler
+
 import requests
 from flask import Flask, render_template, Response, jsonify, json, request
 from camera import VideoCamera
@@ -5,14 +8,26 @@ import cv2
 from cloudant.client import Cloudant
 from cloudant.error import CloudantException
 from cloudant.result import Result, ResultByKey
+from pydrive.auth import GoogleAuth
+from pydrive.drive import GoogleDrive
+from flask_script import Manager, Server
+
+
+from upload import uploadGDrive
+from webserver import webServer
 
 app = Flask(__name__)
 
 video_stream = VideoCamera()
+# upload_gdrive = uploadGDrive()
+# web_server = webServer()
 
 @app.route('/')
 def index():
+    # webServer()
     return render_template('index.html')
+
+
 
 def gen(camera):
     while True:
@@ -25,15 +40,29 @@ def video_feed():
         return Response(gen(video_stream),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
+# @app.route('/onClick', methods=['GET', 'POST','DELETE', 'PATCH'])
+# def onClick():
+#     encoding = 'utf-8'
+#     # bytesStream = video_stream.get_frame
+#     # print(str(video_stream.get_frame_file()))
+#     upload_gdrive.uploadBytesToGDrive(video_stream.get_frame_file())
+#
+#     tempDict = {'name':'name', 'accountId':'accountId', 'accountType':'accountType', 'balance':'balance', 'mainBranch':'mainBranch'}
+#     response = jsonify(tempDict)
+#     return response
+
+
 @app.route('/onClick', methods=['GET', 'POST','DELETE', 'PATCH'])
 def onClick():
     encoding = 'utf-8'
-    imageByteStr = str(video_stream.get_frame_string())
-    imageByteStr = 'data:image/jpeg;base64,' + imageByteStr[2:-1]
+    # imageByteStr = str(video_stream.get_frame_string())
+    # imageByteStr = 'data:image/jpeg;base64,' + imageByteStr[2:-1]
     # print(str('--frame\r\n Content-Type: image/jpeg\r\n\r\nb' + (video_stream.get_frame().decode(encoding)) + '\r\n\r\n'))
+    imagePath = str(video_stream.get_frame_file())
 
     URL = 'http://faceidentify-http-ace-dashboard-prod.mycluster-220882-a0206187d3c93bf725a210436d6057c3-0000.us-south.containers.appdomain.cloud:80/image/v1/postImage'
-    myobj = {'imageData': imageByteStr}
+    # myobj = {'imageData': imageByteStr}
+    myobj = {'imageUrl': imagePath}
     output = requests.post(url = URL, data = json.dumps(myobj))
 
     testResponse = output.json()
@@ -107,9 +136,47 @@ def _getDetailsFromCloudant(person):
 
 
 
+# def custom_call():
+#     # Make sure the server is created at current directory
+#     app.run(host='127.0.0.1', debug=True, port="5000")
+#     print('starting web server')
+#     os.chdir('./temp/')
+#     # Create server object listening the port 80
+#     server_object = HTTPServer(server_address=('127.0.0.1', 8001), RequestHandlerClass=CGIHTTPRequestHandler)
+#     # Start the web server
+#     server_object.serve_forever()
+#     pass
+#
+# class CustomServer(Server):
+#     def __call__(self, app, *args, **kwargs):
+#         custom_call()
+#         #Hint: Here you could manipulate app
+#         return Server.__call__(self, app, *args, **kwargs)
+#
+# app = Flask(__name__)
+# manager = Manager(app)
+#
+# # Remeber to add the command to your Manager instance
+# manager.add_command('runserver', CustomServer())
+#
+# if __name__ == "__main__":
+#     manager.run()
+
+# with app.app_context():
+#     webServer()
+#
+# def run():
+#     app.run(debug=True, use_reloader=False)
+#     # app.run(host='127.0.0.1', debug=True, port="5000")
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', debug=True,port="5000")
+    # webServer()
+    app.run(host='127.0.0.1', debug=True, port="5000")
+    # app.run()
+    # print('after run of flask')
+    # webServer()
+    # print('after starting the webserver')
+
 
 
 

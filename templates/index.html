@@ -14,9 +14,21 @@
 .vertical-center {
   margin: 0;
   position: absolute;
-  top: 80%;
+  top: 95%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
+}
+.header img {
+  float: left;
+  width: 100px;
+  height: 100px;
+  background: #555;
+}
+
+.header h1 {
+  position: relative;
+  top: 18px;
+  left: 10px;
 }
 </style>
 
@@ -78,6 +90,10 @@
 </script>
 
   <body>
+  <div class="header">
+      <img src="img/logo.png" alt="logo" />
+      <h1>Face Recognition</h1>
+    </div>
   <div style="width: 100%;">
       <div style="float:left; width: 60%">
          <img src="{{ url_for('video_feed') }}" />
