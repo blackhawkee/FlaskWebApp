@@ -1,0 +1,41 @@
+body {
+  font-family:Arial;
+  color: white;
+  background-color: black;
+  padding: 20px;
+  text-align: center;
+}
+
+#out {
+  margin: 0px auto;
+  width: 500px;
+  height: 375px;
+  padding: 10px;
+  box-shadow: 0px 0px 10px 10px blue;
+
+}
+video {
+  width: 500px;
+  height: 375px;
+  alignment: left;
+  background-color: #666;
+}
+
+button {
+  background-color: blue;
+  border: transparent solid 2px;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  width: 500px;
+}
+button:hover {
+  border: white solid 2px;
+}
+
+button:active {
+  background-color: darkblue;
+}

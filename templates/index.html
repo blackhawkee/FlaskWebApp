@@ -1,118 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Video Stream</title>
-  </head>
+<img>
+<img src="/static/COG-Logo-White.svg" alt="Cognizant Technology Solutions"
+     style="float: left;max-width:350px;width:100%;">
+<br><br><br><br><br>
+<title>Video Stream</title>
+<link rel="stylesheet" type="text/css" href="../static/index.css"/>
+</head>
 
-  <style>
-.container {
-  height: 200px;
-  position: relative;
-  border: 3px solid green;
-}
-
-.vertical-center {
-  margin: 0;
-  position: absolute;
-  top: 95%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-.header img {
-  float: left;
-  width: 100px;
-  height: 100px;
-  background: #555;
-}
-
-.header h1 {
-  position: relative;
-  top: 18px;
-  left: 10px;
-}
-</style>
-
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type=text/javascript>
-        $(function() {
-          $('a#test').bind('click', function() {
+    $(function () {
+        $('a#test').bind('click', function () {
             $.getJSON('/onClick',
-                function(data) {
-                //var canvas = document.getElementById('canvas');
-                //var context = canvas.getContext('2d');
-                //context.font = '15px Arial'
-                //context.fillStyle = '0,0,0';
-                //context.fillText(data.get('OutputPersonName'), 150, 50);
-                    //context.fillText('Hello There!!', 20, 50);
-                    //alert('helo');
-                    //var input = JSON.parse(data);
-                    //alert('Hello ' + data.OutputPersonName);
-                //console.log(data);
-                //console.log('from the java script function');
-                let out = document.getElementById('out');
-                while (out.firstChild) {
-                    out.removeChild(out.firstChild);
-                }
+                function (data) {
+                    let out = document.getElementById('out');
+                    while (out.firstChild) {
+                        out.removeChild(out.firstChild);
+                    }
+                    let inpResponse = data.response;
+                    if (data.error != null) {
+                        out.appendChild(document.createTextNode('Unknown Customer'));
+                        out.appendChild(document.createElement("br"));
+                    }
+
+                    out.appendChild(document.createTextNode('Name :  ' + inpResponse.name));
+                    out.appendChild(document.createElement("br"));
+                    out.appendChild(document.createTextNode('AccountId : ' + inpResponse.accountId));
+                    out.appendChild(document.createElement("br"));
+                    out.appendChild(document.createTextNode('AccountType : ' + inpResponse.accountType));
+                    out.appendChild(document.createElement("br"));
+                    out.appendChild(document.createTextNode('Balance : ' + inpResponse.balance));
+                    out.appendChild(document.createElement("br"));
+                    out.appendChild(document.createTextNode('Branch : ' + inpResponse.mainBranch));
+                    out.appendChild(document.createElement("br"));
 
 
-                //let text = document.createTextNode('Hello ' + data.name);
-                    {#let text = document.createTextNode('Hello ' + data.name#}
-                    {#    + '<br>' + 'AccountId ' + data.mainBranch#}
-                    {#    + '<br>' + 'AccountType ' + data.mainBranch#}
-                    {#    + '<br>' + 'Balance ' + data.mainBranch#}
-                    {#    + '<br>' + 'Branch ' + data.mainBranch);#}
-                //p.textContent = 'hello'
-                    out.style.whiteSpace = "pre-wrap";
-                    var testString = 'This is my statement one.&#13;&#10;This is my statement2';
-                {#out.appendChild(document.createTextNode('Hello ' + data.name#}
-                {#    + '&#13;&#10;' + 'AccountId ' + data.accountId#}
-                {#    + '&#13;&#10;' + 'AccountType ' + data.accountType#}
-                {#    + '<br>' + 'Balance ' + data.accountType#}
-                {#    + '<br>' + 'Branch ' + data.mainBranch#}
-                {#));#}
-                    var br = document.createElement("br");
-                    out.appendChild(document.createTextNode('Hello ' + data.name));
-                out.appendChild(document.createElement("br"));
-                out.appendChild(document.createTextNode('AccountId : ' + data.accountId));
-                out.appendChild(document.createElement("br"));
-                out.appendChild(document.createTextNode('AccountType : ' + data.accountType));
-                out.appendChild(document.createElement("br"));
-                out.appendChild(document.createTextNode('Balance : ' + data.balance));
-                out.appendChild(document.createElement("br"));
-                out.appendChild(document.createTextNode('Branch : ' + data.mainBranch));
-                out.appendChild(document.createElement("br"));
-
-
-            });
+                });
             return false;
-          });
         });
+    });
 </script>
 
-  <body>
-  <div class="header">
-      <img src="img/logo.png" alt="logo" />
-      <h1>Face Recognition</h1>
-    </div>
-  <div style="width: 100%;">
-      <div style="float:left; width: 60%">
-         <img src="{{ url_for('video_feed') }}" />
-      </div>
-      <form>
-            <a href=# id=test>
-                <div class="vertical-center">
-                    <button id="snap"  class='btn btn-default'>Snap Photo</button>
-                </div>
-            </a>
-        </form>
-      <!--
-       <div style="float:right; width: 20%">
-            <canvas id="canvas" width="200" height="100"></canvas>
-           <canvas id="canvas" width="150" height="150"></canvas>
-        </div>
-        -->
-      <div id = "out" style="float:right;  width: 30%" class="container"></div>
+<body class="body">
 
-  </div>
-  </body>
+<form>
+    <TABLE BORDER="0">
+        <TR>
+            <TD>
+                <div class="video">
+                    <img src="{{ url_for('video_feed') }}"/>
+                </div>
+            </TD>
+            <TD>
+                <div id="out" style="text-align: left; font-size: 35px; width: 750px"></div>
+            </TD>
+        </TR>
+        <TR>
+            <TD>
+                <a href=# id=test>
+                    <div style="">
+                        <button id="snap" class='btn btn-default'>Identify Customer</button>
+                    </div>
+                </a>
+            </TD>
+        </TR>
+    </TABLE>
+</form>
+</body>
 </html>
