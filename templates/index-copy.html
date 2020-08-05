@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<img>
+<img src="/static/COG-Logo-White.svg" alt="Cognizant Technology Solutions"
+     style="float: left;max-width:350px;width:100%;">
+<br><br><br><br><br>
+<title>Video Stream</title>
+<link rel="stylesheet" type="text/css" href="../static/index.css"/>
+</head>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    var video = document.getElementById('video');
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        // Not adding `{ audio: true }` since we only want video now
+        navigator.mediaDevices.getUserMedia({video: true}).then(function (stream) {
+            video.src = window.URL.createObjectURL(stream);
+            video.play();
+        });
+    }
+</script>
+<script type=text/javascript>
+    $(function () {
+        $('a#test').bind('click', function () {
+            $.getJSON('/onClick',
+                function (data) {
+                    let out = document.getElementById('out');
+                    while (out.firstChild) {
+                        out.removeChild(out.firstChild);
+                    }
+                    let inpResponse = data.response;
+                    if (data.error != null) {
+                        out.appendChild(document.createTextNode('Unknown Customer'));
+                        out.appendChild(document.createElement("br"));
+                    }
+
+                    out.appendChild(document.createTextNode('Name :  ' + inpResponse.name));
+                    out.appendChild(document.createElement("br"));
+                    out.appendChild(document.createTextNode('AccountId : ' + inpResponse.accountId));
+                    out.appendChild(document.createElement("br"));
+                    out.appendChild(document.createTextNode('AccountType : ' + inpResponse.accountType));
+                    out.appendChild(document.createElement("br"));
+                    out.appendChild(document.createTextNode('Balance : ' + inpResponse.balance));
+                    out.appendChild(document.createElement("br"));
+                    out.appendChild(document.createTextNode('Branch : ' + inpResponse.mainBranch));
+                    out.appendChild(document.createElement("br"));
+
+
+                });
+            return false;
+        });
+    });
+</script>
+
+<body class="body">
+
+<form>
+    <TABLE BORDER="0">
+        <TR>
+            <TD>
+                {#                <div class="video">#}
+                {#                    <img src="{{ url_for('video_feed') }}"/>#}
+                {#                </div>#}
+                <video id="video" autoplay></video>
+            </TD>
+            <TD>
+                <div id="out" style="text-align: left; font-size: 35px; width: 750px"></div>
+            </TD>
+        </TR>
+        <TR>
+            <TD>
+                <a href=# id=test>
+                    <div style="">
+                        <button id="snap" class='btn btn-default'>Identify Customer</button>
+                    </div>
+                </a>
+            </TD>
+        </TR>
+    </TABLE>
+</form>
+</body>
+</html>

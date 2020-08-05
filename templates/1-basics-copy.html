@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        HTML Webcam Capture Demo
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+    <script src="../static/3-upload.js"></script>
+
+{#    <script type="text/javascript" language="javascript">#}
+{#        var versionUpdate = (new Date()).getTime();#}
+{#        var script = document.createElement("script");#}
+{#        script.type = "text/javascript";#}
+{#        script.src = "../static/3-upload.js?v=" + versionUpdate;#}
+{#        document.body.appendChild(script);#}
+{#    </script>#}
+    <!--
+    <script src="1-basics.js"></script>
+    <script src="2-output-file.js"></script>
+
+    <script src="3-upload.js"></script>
+    -->
+    <style>
+        #vid-show, #vid-canvas, #vid-take {
+            margin-bottom: 20px;
+        }
+
+        html, body {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="vid-controls">
+    <video id="vid-show" autoplay></video>
+    <input id="vid-take" type="button" value="Take Photo"/>
+    <div id="vid-canvas"></div>
+</div>
+</body>
+</html>
