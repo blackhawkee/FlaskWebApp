@@ -16,4 +16,5 @@ EXPOSE 5000
 
 ENTRYPOINT [ "python" ]
 
-CMD [ "app.py" ]
+##CMD [ "app.py" ]
+CMD [ "flask run --cert=adhoc" ]
